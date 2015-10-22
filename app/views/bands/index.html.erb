@@ -1,0 +1,29 @@
+<h1>All the Bands in the World</h1>
+
+<a href="<%= new_band_url %>">Enter a New Band</a>
+<br>
+<br>
+
+<table>
+  <% @bands.each do |band| %>
+    <tr>
+      <td><a href="<%=band_url(band)%>"><%= band.name %></a></td>
+
+      <td>
+        <form action="<%= edit_band_url(band) %>" method="GET">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <button>Edit</button>
+        </form>
+      </td>
+
+      <td>
+        <form action="<%= band_url(band) %>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <button>Delete</button>
+        </form>
+      </td>
+    </tr>
+
+  <% end %>
+</table>

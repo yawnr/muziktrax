@@ -7,4 +7,6 @@ class Band < ActiveRecord::Base
     source: :tracks,
     dependent: :destroy
 
+  validates :name, presence: true
+
 end
