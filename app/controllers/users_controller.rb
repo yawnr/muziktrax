@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :require_logged_out, only: [:create, :new]
+
   def new
     @user = User.new
     render :new
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find[params[:user][:id]]
+    @user = User.find(params[:id])
     render :show
   end
 

@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
+    @user = User.new
     render :new
   end
 
@@ -12,7 +13,7 @@ class SessionsController < ApplicationController
 
     if user
       login_user!(user)
-      redirect_to(user_url)
+      redirect_to(user_url(user))
     else
       flash.now[:errors] = "Invalid login information."
       render :new
@@ -21,7 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout_user!
+    logout_user!(current_user)
     redirect_to(new_session_url)
   end
 

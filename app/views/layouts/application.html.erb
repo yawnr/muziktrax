@@ -5,6 +5,20 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+    <form action="<%=logged_in? ? session_url : new_session_url%>" method="POST">
+      <input type="hidden" name="_method" value="<%=logged_in? ? "DELETE" : "GET"%>">
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+      <button><%=logged_in? ? "Logout" : "Login"%></button>
+    </form>
+
+    <% if !logged_in? %>
+    <form action="<%=new_user_url%>" method="GET">
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+      <button>Create Account</button>
+    </form>
+    <% end %>
+
 </head>
 <body>
 
